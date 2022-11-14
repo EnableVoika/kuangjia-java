@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.voika.auth.dao.account.MAccountDao">
+
+    <select id="query" resultType="com.voika.myundefined.dao.account.po.AccountPO">
+        select *
+        from tb_account
+        where username = #{username}
+        and deleted = 0
+        <if test="password != null">
+            and password = #{password}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </select>
+
+    <select id="dir" resultType="com.voika.myundefined.dao.account.po.AccountPO">
+        select * from tb_account
+        where 1=1
+        <if test="deleted != null">
+            and deleted = #{deleted}
+        </if>
+        <if test="username != null">
+            and username = #{username}
+        </if>
+        <if test="password != null">
+            and password = #{password}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+        <if test="bizId != null">
+            and biz_id = #{bizId}
+        </if>
+        <if test="email != null">
+            and email = #{email}
+        </if>
+    </select>
+
+    <update id="resetPwd">
+        update tb_account
+        set password = #{newPassword}
+        where username = #{username}
+          and deleted = 0
+          and status = 1
+    </update>
+
+    <!-- 通用插入 -->
+    <insert id="insert" parameterType="com.voika.myundefined.dao.account.po.AccountPO">
+        insert into tb_account(
+        biz_id,
+        username,
+        password
+        <if test="email != null">
+            ,email
+        </if>
+        <if test="accountType != null">
+            ,account_type
+        </if>
+        <if test="alias != null">
+            ,alias
+        </if>
+        <if test="status != null">
+            ,status
+        </if>
+        <if test="deleted != null">
+            ,deleted
+        </if>
+        <if test="createTime != null">
+            ,create_time
+        </if>
+        <if test="modifyTime != null">
+            ,modify_time
+        </if>
+        <if test="creatorId != null">
+            ,creator_id
+        </if>
+        <if test="creatorName != null">
+            ,creator_name
+        </if>
+        <if test="version != null">
+            ,version
+        </if>
+        )values (
+        #{bizId},
+        #{username},
+        #{password}
+        <if test="email != null">
+            ,#{email}
+        </if>
+        <if test="accountType != null">
+            ,#{accountType}
+        </if>
+        <if test="alias != null">
+            ,#{alias}
+        </if>
+        <if test="status != null">
+            ,#{status}
+        </if>
+        <if test="deleted != null">
+            ,#{deleted}
+        </if>
+        <if test="createTime != null">
+            ,#{createTime}
+        </if>
+        <if test="modifyTime != null">
+            ,#{modifyTime}
+        </if>
+        <if test="creatorId != null">
+            ,#{creatorId}
+        </if>
+        <if test="creatorName != null">
+            ,#{creatorName}
+        </if>
+        <if test="version != null">
+            ,#{version}
+        </if>
+        )
+    </insert>
+
+    <!-- 根据bizid更新 -->
+    <update id="updateByBizId" parameterType="com.voika.myundefined.dao.account.po.AccountPO">
+        update tb_account set modify_time = now()
+        <if test="email != null">
+            ,email = #{email}
+        </if>
+        <if test="accountType != null">
+            ,account_type = #{accountType}
+        </if>
+        <if test="alias != null">
+            ,alias = #{alias}
+        </if>
+        <if test="status != null">
+            ,status = #{status}
+        </if>
+        <if test="deleted != null">
+            ,deleted = #{deleted}
+        </if>
+        <if test="createTime != null">
+            ,create_time = #{createTime}
+        </if>
+        <if test="creatorId != null">
+            ,creator_id = #{creatorId}
+        </if>
+        <if test="creatorName != null">
+            ,creator_name = #{creatorName}
+        </if>
+        <if test="version != null">
+            ,version = #{version}
+        </if>
+        where deleted = 0 and biz_id = #{bizId}
+    </update>
+
+</mapper>
