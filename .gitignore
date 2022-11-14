@@ -10,6 +10,14 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# 自定义配置
+.idea
+target
+*.iml
+node_modules
+.DS_Store
+dist
+
 # Package Files #
 *.jar
 *.war
