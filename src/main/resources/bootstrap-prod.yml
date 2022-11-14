@@ -1,32 +1,33 @@
 server:
   servlet:
     context-path: /auth
-  port: 8083
+  port: 8089
 spring:
   redis:
     host: localhost
     port: 6379
+  # 配置读取jsp文件规则
   thymeleaf:
     encoding: UTF-8
     mode: HTML5
     prefix: classpath:/WEB-INF/jsp/
     suffix: .jsp
     cache: false
-  cloud:
-    nacos:
-      discovery:
-#        server-addr: 124.221.243.242:8848
-        server-addr: localhost:8848
-#        server-addr: 10.211.55.3:8848
-        namespace: myweb
-      config:
-#        server-addr: 124.221.243.242:8848
-        server-addr: localhost:8848
-#        server-addr: 10.211.55.3:8848
-        namespace: auth
-        prefix: auth-service
-        file-extension: yml
-        group: DEFAULT_GROUP
+#  cloud:
+#    nacos:
+#      discovery:
+##        server-addr: 124.221.243.242:8848
+#        server-addr: localhost:8848
+##        server-addr: 10.211.55.3:8848
+#        namespace: myweb
+#      config:
+##        server-addr: 124.221.243.242:8848
+#        server-addr: localhost:8848
+##        server-addr: 10.211.55.3:8848
+#        namespace: auth
+#        prefix: auth-service
+#        file-extension: yml
+#        group: DEFAULT_GROUP
   datasource:
 #    url: jdbc:mysql://124.221.243.242/voika?serverTimezone=UTC
     url: jdbc:mysql://localhost/voika?serverTimezone=UTC

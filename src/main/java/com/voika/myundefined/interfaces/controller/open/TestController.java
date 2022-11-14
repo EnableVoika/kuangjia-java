@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class TestController {
 
-    @Resource
+//    @Resource
     private JwtUtil jwtUtil;
 
     @Resource(name = "iRedisImpl")

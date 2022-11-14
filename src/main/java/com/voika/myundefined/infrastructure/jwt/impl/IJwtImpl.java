@@ -1,6 +1,8 @@
-package com.voika.myundefined.infrastructure.utils;
+package com.voika.myundefined.infrastructure.jwt.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.voika.myundefined.infrastructure.jwt.IJwt;
+import com.voika.myundefined.infrastructure.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -14,10 +16,8 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * 生成token时，没有传过期时间，默认是两天
- */
-public class JwtUtil {
+@Component
+public class IJwtImpl implements IJwt {
 
     /**
      * 如果是放入springboot项目，可以解开该注解
@@ -28,7 +28,7 @@ public class JwtUtil {
 
 //    private final Logger LOGGER = LoggerFactory.getLogger(JwtUtil.class);
 
-    public JwtUtil() {
+    public IJwtImpl() {
     }
 
 
@@ -48,6 +48,7 @@ public class JwtUtil {
      *
      * @return
      */
+    @Override
     public Claims parse(String token) {
         return Jwts.parser()
                 .setSigningKey(this.secret.getBytes())
@@ -65,6 +66,7 @@ public class JwtUtil {
      * @param token token
      * @return 过期的那一刻
      */
+    @Override
     public Date getExpir(String token) {
         return Jwts.parser()
                 .setSigningKey(this.secret.getBytes())
@@ -78,6 +80,7 @@ public class JwtUtil {
      * @param token token
      * @return 已过期返回true，未过期返回false
      */
+    @Override
     public Boolean isExpired(String token) {
         try {
             Jwts.parser()
@@ -105,10 +108,12 @@ public class JwtUtil {
      * @param claims 用户信息
      * @return token
      */
+    @Override
     public String generateToken(Map<String, Object> claims) {
         return generateToken(claims, Long.valueOf(expirationTimeInSecond));
     }
 
+    @Override
     public String generateToken(Map<String, Object> claims, long expire) {
         Date expirationTime = this.calculationExpirTime(expire);
         byte[] keyBytes = secret.getBytes();
@@ -127,6 +132,7 @@ public class JwtUtil {
      * @param expire 过期时间
      * @return
      */
+    @Override
     public String generateToken(String claims, long expire) {
         Map map = JSONUtil.toBean(claims, Map.class);
         return generateToken(map, expire);
@@ -136,15 +142,18 @@ public class JwtUtil {
      * @param claims json对象
      * @return
      */
+    @Override
     public String generateToken(String claims) {
         Map map = JSONUtil.toBean(claims, Map.class);
         return generateToken(map);
     }
 
+    @Override
     public String generateToken(Object obj) {
         return generateToken(obj, Long.valueOf(expirationTimeInSecond));
     }
 
+    @Override
     public String generateToken(Object obj, long expir) {
         String json = JSONUtil.toJsonStr(obj);
         Map jsonMap = JSONUtil.toBean(json, Map.class);
@@ -157,6 +166,7 @@ public class JwtUtil {
      * @param token token
      * @return 未过期返回true，否则返回false
      */
+    @Override
     public void validateToken(String token) {
         Jwts.parser().setSigningKey(this.secret.getBytes()).parseClaimsJws(token);
     }

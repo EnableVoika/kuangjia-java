@@ -1,5 +1,7 @@
 package com.voika.myundefined.infrastructure.utils;
 
+import java.util.regex.PatternSyntaxException;
+
 public class StringUtil {
 
     public static boolean isEmpty(String var) {
@@ -59,9 +61,17 @@ public class StringUtil {
             return "";
         }
         for (int i = 0; i < param.length; i++) {
-            msg = msg.replaceFirst(separator,param[i]);
+            try {
+                msg = msg.replaceFirst(separator, param[i]);
+            } catch (PatternSyntaxException e) {
+                throw new RuntimeException("\"" + separator + "\"" + "为特殊或者正则表达式,不能使用");
+            }
         }
-        msg = msg.replaceAll(separator,"");
+        try {
+            msg = msg.replaceAll(separator, "");
+        } catch (PatternSyntaxException e) {
+            throw new RuntimeException("\"" + separator + "\"" + "为特殊或者正则表达式,不能使用");
+        }
         return msg;
     }
 

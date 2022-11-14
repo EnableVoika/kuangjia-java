@@ -2,7 +2,7 @@ package com.voika.myundefined.infrastructure.utils;
 
 import java.util.UUID;
 
-public class BusinessUtils {
+public class BusinessUtil {
 
     private String bizId;
 

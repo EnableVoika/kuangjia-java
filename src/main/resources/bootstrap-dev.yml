@@ -6,6 +6,7 @@ spring:
   redis:
     host: 124.221.243.242
     port: 6379
+  # 配置读取jsp文件规则
   thymeleaf:
     encoding: UTF-8
     mode: HTML5

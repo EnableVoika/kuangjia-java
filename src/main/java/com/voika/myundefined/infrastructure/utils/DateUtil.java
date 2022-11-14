@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtils {
+public class DateUtil {
 
     public static final String NOMAL_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
@@ -43,12 +43,12 @@ public class DateUtils {
     /**
      * 是否过期
      */
-    public static boolean isExpri(Date expir) {
-        if (null == expir) {
+    public static boolean isExpr(Date expr) {
+        if (null == expr) {
             return false;
         }
         Date now = new Date();
-        return now.after(expir);
+        return now.after(expr);
     }
 
     /**

@@ -3,6 +3,7 @@ package com.voika.myundefined.infrastructure.interceptor;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.voika.myundefined.infrastructure.JsonData;
+import com.voika.myundefined.infrastructure.jwt.IJwt;
 import com.voika.myundefined.infrastructure.requestdata.Header;
 import com.voika.myundefined.infrastructure.requestdata.RequestData;
 import com.voika.myundefined.infrastructure.requestdata.TokenUser;
@@ -25,7 +26,7 @@ import java.io.PrintWriter;
 public class CustomerInterceptor extends HandlerInterceptorAdapter {
 
     @Resource
-    private JwtUtil jwtUtil;
+    private IJwt jwt;
 
     private void out(JsonData jsonData, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
@@ -45,7 +46,7 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         try {
-            jwtUtil.validateToken(tokenJson);
+            jwt.validateToken(tokenJson);
         } catch (ExpiredJwtException e) {
             PrintWriter out = response.getWriter();
             String jsonResponse = JSONUtil.toJsonStr(JsonData.tokenExpired());
@@ -70,7 +71,7 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 
         // 解密tokeng
         try {
-            Claims claims = jwtUtil.parse(tokenJson);
+            Claims claims = jwt.parse(tokenJson);
             TokenUser tokenUser = new TokenUser();
             BeanUtil.copyProperties(claims,tokenUser);
             tokenUser.setUserId((String) claims.get("bizId"));

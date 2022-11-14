@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ArrayUtils {
+public class ArrayUtil {
 
     /**
      * string转list
@@ -54,36 +54,6 @@ public class ArrayUtils {
             return list2str(list, ",");
         }
         return null;
-    }
-
-    public static String list2str(Function function) {
-        if (null == function)
-            return null;
-        return function.function();
-    }
-
-    public static String list2str(ArrayUtilFunction function) {
-        if (null == function) {
-            return null;
-        }
-        return function.list2str();
-    }
-
-    public static String util(ArrayUtilFunction function) {
-        if (null == function) {
-            return null;
-        }
-        return function.list2str();
-    }
-
-    public static abstract class ArrayUtilFunction {
-        public abstract String list2str();
-    }
-
-
-    @FunctionalInterface
-    public static interface Function {
-        String function();
     }
 
 }

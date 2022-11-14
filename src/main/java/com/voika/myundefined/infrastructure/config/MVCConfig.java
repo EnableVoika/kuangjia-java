@@ -1,8 +1,11 @@
 package com.voika.myundefined.infrastructure.config;
 
 import com.voika.myundefined.infrastructure.interceptor.CustomerInterceptor;
+import org.apache.naming.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -55,6 +58,12 @@ public class MVCConfig implements WebMvcConfigurer {
         registry.addInterceptor(customerInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login/**", "/test/**");
+    }
+
+    @Bean(name = "javaMailSenderImpl")
+    public JavaMailSender javaMailSenderImpl() {
+        BeanFactory beanFactory = new BeanFactory();
+        return new JavaMailSenderImpl();
     }
 
 //    @Bean
