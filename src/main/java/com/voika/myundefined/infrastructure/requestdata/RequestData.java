@@ -16,5 +16,4 @@ public class RequestData {
     public RequestData() {
 
     }
-
 }
