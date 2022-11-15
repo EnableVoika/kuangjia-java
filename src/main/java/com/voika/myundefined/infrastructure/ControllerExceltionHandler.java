@@ -1,6 +1,7 @@
 package com.voika.myundefined.infrastructure;
 
 import com.voika.myundefined.infrastructure.exception.BusinessException;
+import com.voika.myundefined.infrastructure.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,6 +20,9 @@ public class ControllerExceltionHandler {
 
     @ExceptionHandler(BusinessException.class)
     public JsonData businessException(BusinessException e) {
+        if (StringUtil.isNotEmpty(e.getMessage())) {
+            return JsonData.error(e.getMessage());
+        }
         return JsonData.error();
     }
 

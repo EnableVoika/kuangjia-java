@@ -1,7 +1,10 @@
 package com.voika.myundefined.interfaces.controller.open;
 
-import com.voika.myundefined.infrastructure.requestdata.RequestData;
-import com.voika.myundefined.infrastructure.requestdata.TokenUser;
+import com.voika.myundefined.infrastructure.JsonData;
+import com.voika.myundefined.infrastructure.email.MailClient;
+import com.voika.myundefined.infrastructure.entity.email.SendEmailDO;
+import com.voika.myundefined.infrastructure.exception.BusinessException;
+import com.voika.myundefined.infrastructure.jwt.IJwt;
 import com.voika.myundefined.infrastructure.utils.JwtUtil;
 import com.voika.myundefined.infrastructure.client.redis.IRedis;
 import lombok.extern.slf4j.Slf4j;
@@ -11,44 +14,68 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @RequestMapping("/test")
 @RestController
 @Slf4j
 public class TestController {
 
-//    @Resource
+    //    @Resource
     private JwtUtil jwtUtil;
 
     @Resource(name = "iRedisImpl")
     private IRedis redis;
 
+    @Resource(name = "jwt")
+    private IJwt jwt;
+
+    @Resource
+    private MailClient mailClient;
+
+    /**
+     * 测试
+     */
     @RequestMapping
-    public Map<String,Object> test(String parm) {
-
-        Map<String, Object> resp = new HashMap<>();
-
-        TokenUser tokenUser = RequestData.TokenUser;
-        resp.put("parm",parm);
-        resp.put("code",200);
-        resp.put("data",tokenUser);
-        resp.put("ref",true);
-        resp.put("msg","测试接口通畅");
+    public JsonData test() {
         try {
-            redis.set("username","测试张三",20, TimeUnit.SECONDS);
-            String username = redis.get("username");
-            System.out.println(username);
-            String s = jwtUtil.generateToken(resp);
-            System.out.println(s);
-        }catch (Exception e) {
-            log.error("",e);
-            resp.put("code",500);
-            resp.put("msg","出现异常了");
-            resp.put("ref",false);
-            return resp;
+            // service
+            System.out.println(jwt);
+            System.out.println(redis);
+            Map<String, Object> user = new HashMap<String, Object>(){{
+                put("name","张三");
+                put("age",18);
+                put("sexy","男");
+            }};
+            String token = jwt.generateToken(user);
+            user = jwt.parse(token);
+            System.out.println(user);
+            SendEmailDO sendEmailDO = new SendEmailDO();
+            sendEmailDO.setToUser("2721688374@qq.com");
+            sendEmailDO.setFromUser("965840507@qq.com");
+            sendEmailDO.setSubject("测试邮件");
+            sendEmailDO.setContent("这是一封测试邮件");
+            mailClient.sendEmail(sendEmailDO);
+//            func();
+            return JsonData.success();
+        } catch (BusinessException e) {
+            int code = null == e.getCode() ? 1 : e.getCode();
+            return JsonData.error(e.getMessage(), code);
+        } catch (Exception e) {
+            String msg = "测试时出现异常";
+            log.error(msg, e);
+            return JsonData.error(msg);
         }
-        return resp;
+    }
+
+    private void func() {
+        try {
+            // core
+            throw new BusinessException("哎呀～网络开小差了");
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage());
+        } catch (Exception e) {
+            log.error("出现异常{}", e);
+        }
     }
 
 }

@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
-@Component("iRedisImpl")
-@DependsOn("stringRedisTemplate")
 public class IRedisImpl implements IRedis {
 
     @Resource

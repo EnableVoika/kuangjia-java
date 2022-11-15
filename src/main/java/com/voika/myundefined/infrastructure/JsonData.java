@@ -36,6 +36,28 @@ public class JsonData {
         return new JsonData(0, true, "成功", data);
     }
 
+    public static JsonData success(String msg, Integer errorCode) {
+        msg = StringUtil.isEmpty(msg) ? "成功" : msg;
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, msg, null);
+    }
+
+    public static JsonData success(Integer errorCode) {
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, "成功", null);
+    }
+
+    public static JsonData success(String msg, Integer errorCode, Object data) {
+        msg = StringUtil.isEmpty(msg) ? "成功" : msg;
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, msg, data);
+    }
+
+    public static JsonData success(Integer errorCode, Object data) {
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, "成功", data);
+    }
+
     public static JsonData error() {
         return new JsonData(1, false, "系统繁忙，请稍后再试", null);
     }
