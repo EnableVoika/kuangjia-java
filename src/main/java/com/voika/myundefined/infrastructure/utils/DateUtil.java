@@ -44,9 +44,6 @@ public class DateUtil {
      * 是否过期
      */
     public static boolean isExpr(Date expr) {
-        if (null == expr) {
-            return false;
-        }
         Date now = new Date();
         return now.after(expr);
     }
