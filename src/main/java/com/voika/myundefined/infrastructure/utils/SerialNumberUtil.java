@@ -6,6 +6,12 @@ public class SerialNumberUtil {
     public static final String ALL_NUM = "num";
     public static final String EN_NUM = "em";
 
+    /**
+     * 生成 前缀+len 长度的随机数
+     * @param prefix 前缀
+     * @param len 后位长度
+     * @return
+     */
     public static String getSerialNumber(String prefix, int len) {
         StringBuffer var2 = new StringBuffer();
         int i = 0;

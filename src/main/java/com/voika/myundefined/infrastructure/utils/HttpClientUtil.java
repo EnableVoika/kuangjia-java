@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 public class HttpClientUtil {
 
@@ -18,6 +19,13 @@ public class HttpClientUtil {
 
     }
 
+    /**
+     * get请求
+     * @param url 拼接好参数的url
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public static String getMethod(String url) throws URISyntaxException, IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         URIBuilder uriBuilder = new URIBuilder(url);
@@ -28,5 +36,4 @@ public class HttpClientUtil {
         String body = EntityUtils.toString(entity);
         return body;
     }
-
 }
