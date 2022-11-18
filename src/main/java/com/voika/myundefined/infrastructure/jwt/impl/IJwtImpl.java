@@ -32,6 +32,12 @@ public class IJwtImpl implements IJwt {
     @Value("${myConfig.jwt.defaultExpirTime}")
     private long defaultExpirTime;
 
+    {
+        System.out.println(secret);
+        System.out.println(defaultExpirTime);
+
+    }
+
     public IJwtImpl() {
     }
 

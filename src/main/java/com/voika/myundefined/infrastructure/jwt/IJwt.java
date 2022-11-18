@@ -22,7 +22,7 @@ public interface IJwt {
     Claims parse(String token, Class clazz);
 
     /**
-     * 获取token到期的时间时间
+     * 获取token到期的时间
      * token几号、多久到期
      *
      * @param token token

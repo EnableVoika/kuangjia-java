@@ -1,9 +1,7 @@
-package com.voika.myundefined.infrastructure.client.redis.impl;
+package com.voika.myundefined.infrastructure.redis.impl;
 
-import com.voika.myundefined.infrastructure.client.redis.IRedis;
-import org.springframework.context.annotation.DependsOn;
+import com.voika.myundefined.infrastructure.redis.IRedis;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;

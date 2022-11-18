@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /myproject
-  port: 8083
+  port: 9090
 spring:
   mail:
     host: smtp.qq.com

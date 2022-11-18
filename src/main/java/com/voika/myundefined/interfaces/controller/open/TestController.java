@@ -6,7 +6,7 @@ import com.voika.myundefined.infrastructure.entity.email.SendEmailDO;
 import com.voika.myundefined.infrastructure.exception.BusinessException;
 import com.voika.myundefined.infrastructure.jwt.IJwt;
 import com.voika.myundefined.infrastructure.utils.JwtUtil;
-import com.voika.myundefined.infrastructure.client.redis.IRedis;
+import com.voika.myundefined.infrastructure.redis.IRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

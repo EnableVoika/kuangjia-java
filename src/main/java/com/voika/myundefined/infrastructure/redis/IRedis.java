@@ -1,4 +1,4 @@
-package com.voika.myundefined.infrastructure.client.redis;
+package com.voika.myundefined.infrastructure.redis;
 
 import java.util.concurrent.TimeUnit;
 
