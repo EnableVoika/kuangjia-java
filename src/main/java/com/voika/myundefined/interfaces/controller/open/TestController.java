@@ -50,8 +50,8 @@ public class TestController {
             user = jwt.parse(token);
             System.out.println(user);
             SendEmailDO sendEmailDO = new SendEmailDO();
-            sendEmailDO.setToUser("2721688374@qq.com");
-            sendEmailDO.setFromUser("965840507@qq.com");
+            sendEmailDO.setFromUser("2721688374@qq.com");
+            sendEmailDO.setToUser("965840507@qq.com");
             sendEmailDO.setSubject("测试邮件");
             sendEmailDO.setContent("这是一封测试邮件");
             mailClient.sendEmail(sendEmailDO);
