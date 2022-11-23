@@ -1,17 +1,18 @@
 package com.voika.myundefined.interfaces.controller.open;
 
-import com.voika.myundefined.infrastructure.requestdata.RequestData;
-import com.voika.myundefined.infrastructure.requestdata.TokenUser;
-import com.voika.myundefined.infrastructure.utils.JwtUtil;
+import cn.hutool.core.date.DateUtil;
 import com.voika.myundefined.infrastructure.client.redis.IRedis;
+import com.voika.myundefined.infrastructure.utils.JwtUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @RequestMapping("/test")
 @RestController
@@ -25,22 +26,13 @@ public class TestController {
     private IRedis redis;
 
     @RequestMapping
-    public Map<String,Object> test(String parm) {
+    public Map<String,Object> test(@RequestBody Body body) {
 
         Map<String, Object> resp = new HashMap<>();
-
-        TokenUser tokenUser = RequestData.TokenUser;
-        resp.put("parm",parm);
-        resp.put("code",200);
-        resp.put("data",tokenUser);
-        resp.put("ref",true);
-        resp.put("msg","测试接口通畅");
         try {
-            redis.set("username","测试张三",20, TimeUnit.SECONDS);
-            String username = redis.get("username");
-            System.out.println(username);
-            String s = jwtUtil.generateToken(resp);
-            System.out.println(s);
+            String birth = body.getBirth();
+            DateUtil.parseLocalDateTime(birth,"yyyy-MM-dd HH:mm:ss");
+            System.out.println(birth);
         }catch (Exception e) {
             log.error("",e);
             resp.put("code",500);
@@ -51,4 +43,8 @@ public class TestController {
         return resp;
     }
 
+}
+@Data
+class Body {
+    private String birth;
 }
