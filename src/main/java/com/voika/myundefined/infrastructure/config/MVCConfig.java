@@ -22,23 +22,6 @@ public class MVCConfig implements WebMvcConfigurer {
     private CustomerInterceptor customerInterceptor;
 
     /**
-     * 过滤器
-     *
-     * @return
-     */
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*");
-        config.setAllowCredentials(true);
-        config.addAllowedMethod("*");
-        config.addAllowedHeader("*");
-        UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();
-        configSource.registerCorsConfiguration("/**", config);
-        return new CorsFilter(configSource);
-    }
-
-    /**
      * 静态资源处理
      */
     @Override
@@ -58,12 +41,6 @@ public class MVCConfig implements WebMvcConfigurer {
         registry.addInterceptor(customerInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login/**", "/test/**");
-    }
-
-    @Bean(name = "javaMailSenderImpl")
-    public JavaMailSender javaMailSenderImpl() {
-        BeanFactory beanFactory = new BeanFactory();
-        return new JavaMailSenderImpl();
     }
 
 //    @Bean

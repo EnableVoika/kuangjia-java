@@ -19,41 +19,90 @@ public class JsonData {
     }
 
     public static JsonData success() {
-        return new JsonData(200, true, "成功", null);
+        return new JsonData(0, true, "成功", null);
     }
 
     public static JsonData success(String msg) {
         msg = StringUtil.isEmpty(msg) ? "成功" : msg;
-        return new JsonData(200, true, msg, null);
+        return new JsonData(0, true, msg, null);
     }
 
     public static JsonData success(String msg, Object data) {
         msg = StringUtil.isEmpty(msg) ? "成功" : msg;
-        return new JsonData(200, true, msg, data);
+        return new JsonData(0, true, msg, data);
     }
 
     public static JsonData success(Object data) {
-        return new JsonData(200, true, "成功", data);
+        return new JsonData(0, true, "成功", data);
+    }
+
+    public static JsonData success(String msg, Integer errorCode) {
+        msg = StringUtil.isEmpty(msg) ? "成功" : msg;
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, msg, null);
+    }
+
+    public static JsonData success(Integer errorCode) {
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, "成功", null);
+    }
+
+    public static JsonData success(String msg, Integer errorCode, Object data) {
+        msg = StringUtil.isEmpty(msg) ? "成功" : msg;
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, msg, data);
+    }
+
+    public static JsonData success(Integer errorCode, Object data) {
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, "成功", data);
     }
 
     public static JsonData error() {
-        return new JsonData(250, false, "失败", null);
+        return new JsonData(1, false, "系统繁忙，请稍后再试", null);
     }
 
     public static JsonData error(String msg) {
-        msg = StringUtil.isEmpty(msg) ? "失败" : msg;
-        return new JsonData(250, false, msg, null);
+        msg = StringUtil.isEmpty(msg) ? "系统繁忙，请稍后再试" : msg;
+        return new JsonData(1, false, msg, null);
     }
 
     public static JsonData error(String msg, Object data) {
-        msg = StringUtil.isEmpty(msg) ? "失败" : msg;
-        return new JsonData(250, false, msg, data);
+        msg = StringUtil.isEmpty(msg) ? "系统繁忙，请稍后再试" : msg;
+        return new JsonData(1, false, msg, data);
     }
 
     public static JsonData error(Object data) {
-        return new JsonData(250, false, "失败", data);
+        return new JsonData(1, false, "系统繁忙，请稍后再试", data);
     }
 
+    public static JsonData error(String msg, Integer errorCode) {
+        msg = StringUtil.isEmpty(msg) ? "系统繁忙，请稍后再试" : msg;
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, msg, null);
+    }
+
+    public static JsonData error(Integer errorCode) {
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, "系统繁忙，请稍后再试", null);
+    }
+
+    public static JsonData error(String msg, Integer errorCode, Object data) {
+        msg = StringUtil.isEmpty(msg) ? "系统繁忙，请稍后再试" : msg;
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, msg, data);
+    }
+
+    public static JsonData error(Integer errorCode, Object data) {
+        errorCode = null == errorCode ? 1 : errorCode;
+        return new JsonData(errorCode, false, "系统繁忙，请稍后再试", data);
+    }
+
+    /**
+     * 没有权限
+     *
+     * @return
+     */
     public static JsonData noAuth() {
         return new JsonData(5000, false, "没有权限", null);
     }
@@ -102,15 +151,19 @@ public class JsonData {
     public static JsonData tokenExpired() {
         return new JsonData(40001, false, "token已过期", null);
     }
+
     public static JsonData malformedToken() {
         return new JsonData(40002, false, "token被篡改", null);
     }
+
     public static JsonData tokenSignatureErr() {
         return new JsonData(40003, false, "token签名错误", null);
     }
+
     public static JsonData noToken() {
         return new JsonData(40004, false, "没有token", null);
     }
+
     public static JsonData parseErrToken() {
         return new JsonData(40005, false, "token解析失败", null);
     }

@@ -1,4 +1,4 @@
-package com.voika.myundefined.infrastructure.email;
+package com.voika.myundefined.infrastructure.utils;
 
 import com.voika.myundefined.infrastructure.utils.StringUtil;
 

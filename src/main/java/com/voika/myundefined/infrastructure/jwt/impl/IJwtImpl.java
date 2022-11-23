@@ -10,36 +10,44 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.Map;
 
-@Component
 public class IJwtImpl implements IJwt {
 
     /**
-     * 如果是放入springboot项目，可以解开该注解
+     * 密钥
      */
-//    @Value("${myConfig.jwt.secrityKey}")
-//    private String secret;
-    private String secret = "myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt";
-
-//    private final Logger LOGGER = LoggerFactory.getLogger(JwtUtil.class);
-
-    public IJwtImpl() {
-    }
-
+//    @Value("${my-config.jwt.secrity-key}")
+    private String secret;
 
     /**
      * 有效期，单位秒
      * - 默认2周
-     * 如果是放入springboot项目，可以解开该注解
      */
-//    @Value("${myConfig.jwt.expire}")
-//    private String expirationTimeInSecond;
-    private String expirationTimeInSecond = "172800";
+//    @Value("${my-config.jwt.default-expir-time}")
+    private long defaultExpirTime;
+
+    {
+        System.out.println(secret);
+        System.out.println(defaultExpirTime);
+
+    }
+
+    public IJwtImpl() {
+    }
+
+    public IJwtImpl(String secret, long defaultExpirTime) {
+        this.secret = secret;
+        this.defaultExpirTime = defaultExpirTime;
+    }
+
+
+
 
     /**
      * 解析token
@@ -63,6 +71,7 @@ public class IJwtImpl implements IJwt {
     /**
      * 获取token到期的时间时间
      * token几号、多久到期
+     *
      * @param token token
      * @return 过期的那一刻
      */
@@ -96,6 +105,7 @@ public class IJwtImpl implements IJwt {
     /**
      * 计算token的过期时间
      * 用于生成token时确定截止日期,作为参数传给创建token的方法
+     *
      * @return 过期时间
      */
     private Date calculationExpirTime(long expire) {
@@ -110,7 +120,8 @@ public class IJwtImpl implements IJwt {
      */
     @Override
     public String generateToken(Map<String, Object> claims) {
-        return generateToken(claims, Long.valueOf(expirationTimeInSecond));
+//        return generateToken(claims, Long.valueOf(defaultExpirTime));
+        return generateToken(claims, defaultExpirTime);
     }
 
     @Override
@@ -150,7 +161,8 @@ public class IJwtImpl implements IJwt {
 
     @Override
     public String generateToken(Object obj) {
-        return generateToken(obj, Long.valueOf(expirationTimeInSecond));
+//        return generateToken(obj, Long.valueOf(defaultExpirTime));
+        return generateToken(obj, defaultExpirTime);
     }
 
     @Override

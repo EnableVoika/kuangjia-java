@@ -10,9 +10,9 @@ public class ArrayUtil {
 
     /**
      * string转list
-     *
+     * 例子: "1,2,3,4,5" 变成 [1,2,3,4,5]
      * @param str
-     * @param separator
+     * @param separator 分隔符，以什么形式分割，例如：","
      * @return
      */
     public static List<String> str2list(String str, String separator) {
@@ -24,6 +24,12 @@ public class ArrayUtil {
         return data;
     }
 
+    /**
+     * 例如 "1,2,3,4" 变成 [1,2,3,4]
+     * 不传分隔符，默认逗号分割
+     * @param str
+     * @return
+     */
     public static List<String> str2list(String str) {
         if (StringUtil.isEmpty(str)) {
             return new ArrayList<>();
@@ -33,6 +39,7 @@ public class ArrayUtil {
 
     /**
      * list转str
+     * 尽量不要用特殊字符，尤其是转义字符
      */
     public static String list2str(List<String> list, String separator) {
         if (StringUtil.isEmpty(separator)) {
@@ -49,6 +56,11 @@ public class ArrayUtil {
         return null;
     }
 
+    /**
+     *
+     * @param list
+     * @return
+     */
     public static String list2str(List<String> list) {
         if (CollectionUtil.isNotEmpty(list)) {
             return list2str(list, ",");

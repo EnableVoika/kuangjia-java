@@ -36,6 +36,12 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        boolean mark = true;
+//        mark = jwtValidate(request,response);
+        return mark;
+    }
+
+    private boolean jwtValidate(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String tokenJson = request.getHeader("token");
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
@@ -93,4 +99,5 @@ public class CustomerInterceptor extends HandlerInterceptorAdapter {
         }
         return true;
     }
+
 }

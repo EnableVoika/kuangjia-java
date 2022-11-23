@@ -1,4 +1,4 @@
-package com.voika.myundefined.infrastructure.entity.dto.email;
+package com.voika.myundefined.infrastructure.entity.email;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SendEmailDTO {
+public class SendEmailDO {
 
     // 发件人
     private String fromUser;

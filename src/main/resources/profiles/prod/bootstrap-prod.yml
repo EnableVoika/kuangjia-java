@@ -3,6 +3,18 @@ server:
     context-path: /auth
   port: 8089
 spring:
+  mail:
+    host: smtp.qq.com
+    username: 2721688374@qq.com
+    # 授权码
+    password: rqncgvmdlqjudeje
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
   redis:
     host: localhost
     port: 6379
@@ -38,3 +50,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: auth-service
+
+myConfig:
+  jwt:
+    secrity-key: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
+    # 默认过期时间 long类型，毫秒单位
+    defaultExpirTime: 172800

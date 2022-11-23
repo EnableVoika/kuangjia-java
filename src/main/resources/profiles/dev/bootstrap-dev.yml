@@ -1,8 +1,20 @@
 server:
   servlet:
     context-path: /myproject
-  port: 8083
+  port: 9090
 spring:
+  mail:
+    host: smtp.qq.com
+    username: 2721688374@qq.com
+    # 授权码
+    password: rqncgvmdlqjudeje
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
   redis:
     host: 124.221.243.242
     port: 6379
@@ -40,7 +52,11 @@ spring:
   application:
     name: auth-service
 
-myConfig:
+my-config:
   jwt:
-    secrityKey: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
-    expire: 172800
+    secrity-key: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
+    # 默认过期时间 long类型，毫秒单位
+#    default-expir-time: 172800
+  # 上传文件路径
+  file:
+    upload-dir: classpath:/static/file
