@@ -7,7 +7,9 @@ import com.voika.myundefined.infrastructure.exception.BusinessException;
 import com.voika.myundefined.infrastructure.jwt.IJwt;
 import com.voika.myundefined.infrastructure.utils.JwtUtil;
 import com.voika.myundefined.infrastructure.redis.IRedis;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,25 +40,10 @@ public class TestController {
     @RequestMapping
     public JsonData test() {
         try {
-            // service
-            System.out.println(jwt);
-            System.out.println(redis);
-            Map<String, Object> user = new HashMap<String, Object>(){{
-                put("name","张三");
-                put("age",18);
-                put("sexy","男");
-            }};
-            String token = jwt.generateToken(user);
-            user = jwt.parse(token);
-            System.out.println(user);
-            SendEmailDO sendEmailDO = new SendEmailDO();
-            sendEmailDO.setFromUser("2721688374@qq.com");
-            sendEmailDO.setToUser("965840507@qq.com");
-            sendEmailDO.setSubject("测试邮件");
-            sendEmailDO.setContent("这是一封测试邮件");
-            mailClient.sendEmail(sendEmailDO);
-//            func();
-            return JsonData.success();
+            A a = new A();
+            a.setKey1("2");
+            a.setKey2(null);
+            return JsonData.success(a);
         } catch (BusinessException e) {
             int code = null == e.getCode() ? 1 : e.getCode();
             return JsonData.error(e.getMessage(), code);
@@ -78,4 +65,9 @@ public class TestController {
         }
     }
 
+}
+@Data
+class A {
+    private String key1;
+    private String key2;
 }

@@ -1,9 +1,4 @@
 import com.voika.myundefined.infrastructure.entity.po.BasePO;
-import com.voika.myundefined.infrastructure.utils.StringUtil;
-import com.voika.myundefined.infrastructure.utils.UrlUtil;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Test3 {
 

@@ -22,7 +22,7 @@ public class JwtUtil {
     /**
      * 如果是放入springboot项目，可以解开该注解
      */
-//    @Value("${myConfig.jwt.secrityKey}")
+//    @Value("${my-config.jwt.secrity-key}")
 //    private String secret;
     private String secret = "myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt";
 
@@ -37,7 +37,7 @@ public class JwtUtil {
      * - 默认2周
      * 如果是放入springboot项目，可以解开该注解
      */
-//    @Value("${myConfig.jwt.expire}")
+//    @Value("${my-config.jwt.expire}")
 //    private String expirationTimeInSecond;
     private String expirationTimeInSecond = "172800";
 

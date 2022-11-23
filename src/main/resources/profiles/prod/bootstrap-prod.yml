@@ -1,7 +1,7 @@
 server:
   servlet:
-    context-path: /myproject
-  port: 9090
+    context-path: /auth
+  port: 8089
 spring:
   mail:
     host: smtp.qq.com
@@ -16,7 +16,7 @@ spring:
             enable: true
             required: true
   redis:
-    host: 124.221.243.242
+    host: localhost
     port: 6379
   # 配置读取jsp文件规则
   thymeleaf:
@@ -25,28 +25,27 @@ spring:
     prefix: classpath:/WEB-INF/jsp/
     suffix: .jsp
     cache: false
-  # 链接腾讯云服务器的cloud
 #  cloud:
 #    nacos:
 #      discovery:
-#        server-addr: 124.221.243.242:8848
-##        server-addr: localhost:8848
+##        server-addr: 124.221.243.242:8848
+#        server-addr: localhost:8848
 ##        server-addr: 10.211.55.3:8848
 #        namespace: myweb
 #      config:
-#        server-addr: 124.221.243.242:8848
-##        server-addr: localhost:8848
+##        server-addr: 124.221.243.242:8848
+#        server-addr: localhost:8848
 ##        server-addr: 10.211.55.3:8848
 #        namespace: auth
 #        prefix: auth-service
 #        file-extension: yml
 #        group: DEFAULT_GROUP
   datasource:
-    url: jdbc:mysql://124.221.243.242/rytlockbrimstone?serverTimezone=UTC
-#    url: jdbc:mysql://localhost/voika?serverTimezone=UTC
+#    url: jdbc:mysql://124.221.243.242/voika?serverTimezone=UTC
+    url: jdbc:mysql://localhost/voika?serverTimezone=UTC
 #    url: jdbc:mysql://10.211.55.3/voika?serverTimezone=UTC
 #    username: voika
-    username: rytlock
+    username: rytlockbrimstone
     password: 3865571999@Ghy
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
@@ -54,6 +53,6 @@ spring:
 
 myConfig:
   jwt:
-    secrityKey: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
+    secrity-key: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
     # 默认过期时间 long类型，毫秒单位
     defaultExpirTime: 172800

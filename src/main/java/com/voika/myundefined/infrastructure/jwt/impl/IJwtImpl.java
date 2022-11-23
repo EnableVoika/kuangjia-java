@@ -22,14 +22,14 @@ public class IJwtImpl implements IJwt {
     /**
      * 密钥
      */
-    @Value("${myConfig.jwt.secrityKey}")
+//    @Value("${my-config.jwt.secrity-key}")
     private String secret;
 
     /**
      * 有效期，单位秒
      * - 默认2周
      */
-    @Value("${myConfig.jwt.defaultExpirTime}")
+//    @Value("${my-config.jwt.default-expir-time}")
     private long defaultExpirTime;
 
     {
