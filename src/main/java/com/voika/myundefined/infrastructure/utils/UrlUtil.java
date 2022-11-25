@@ -44,7 +44,7 @@ public class UrlUtil {
             }
             return result;
         }
-        return null;
+        return path;
     }
 
 }

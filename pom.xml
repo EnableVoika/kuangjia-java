@@ -127,7 +127,12 @@
         <!-- 切换环境 -->
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/resources/profiles/</directory>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/profiles</directory>
+                <!-- 过滤标识 也就是active: "@env@"这个地方 -->
                 <filtering>true</filtering>
             </resource>
             <resource>

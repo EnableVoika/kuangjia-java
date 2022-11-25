@@ -1,6 +1,7 @@
 package com.voika.myundefined.infrastructure;
 
 import com.voika.myundefined.infrastructure.utils.StringUtil;
+import com.voika.myundefined.infrastructure.utils.UrlUtil;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,24 +32,24 @@ public class MyConfigProperties {
     public class File {
 
         public String getUploadDir() {
-            if (StringUtil.isNotEmpty(uploadDir) && (0 == uploadDir.indexOf("classpath:"))) {
-                String path = "";
-                if ("".endsWith(uploadDir.replace("classpath:", ""))) {
-                    path = this.getClass().getClassLoader().getResource("").getPath();
-                    return path;
-                }
-                String classpath = this.getClass().getClassLoader().getResource("").getPath();
-                if (!classpath.endsWith("/")) {
-                    classpath = classpath + "/";
-                }
-                String var = uploadDir.replace("classpath:", "");
-                path = classpath + var;
-                if (var.startsWith("/")) {
-                    path = classpath + var.replaceFirst("/", "");
-                }
-                return path;
-            }
-            return uploadDir;
+//            if (StringUtil.isNotEmpty(uploadDir) && (0 == uploadDir.indexOf("classpath:"))) {
+//                String path = "";
+//                if ("".endsWith(uploadDir.replace("classpath:", ""))) {
+//                    path = this.getClass().getClassLoader().getResource("").getPath();
+//                    return path;
+//                }
+//                String classpath = this.getClass().getClassLoader().getResource("").getPath();
+//                if (!classpath.endsWith("/")) {
+//                    classpath = classpath + "/";
+//                }
+//                String var = uploadDir.replace("classpath:", "");
+//                path = classpath + var;
+//                if (var.startsWith("/")) {
+//                    path = classpath + var.replaceFirst("/", "");
+//                }
+//                return path;
+//            }
+            return UrlUtil.resolveClassPath(uploadDir);
         }
 
         public void setUploadDir(String uploadDir) {
