@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.net.URL;
 import java.util.Properties;
 
 @RestController
@@ -37,6 +38,10 @@ public class FileController {
     public JsonData upload(MultipartFile file) {
         try {
             // service
+            String uploadDir = myConfigProperties.getFile().getUploadDir();
+            System.out.println(uploadDir);
+            String path = MyConfigProperties.class.getClassLoader().getResource("").getPath();
+            System.out.println(path);
             YamlPropertiesFactoryBean yml = new YamlPropertiesFactoryBean();
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             org.springframework.core.io.Resource resource = resolver.getResource("/dev/bootstrap-dev.yml");

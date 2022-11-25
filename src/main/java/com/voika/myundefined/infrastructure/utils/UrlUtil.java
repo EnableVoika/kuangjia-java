@@ -23,4 +23,28 @@ public class UrlUtil {
         return buffer.toString();
     }
 
+    public static String resolveClassPath(String path) {
+        if ("classpath".equals(path) || "classpath:".equals(path)) {
+            return UrlUtil.class.getClassLoader().getResource("").getPath();
+        }
+        if (StringUtil.isNotEmpty(path) && (0 == path.indexOf("classpath:"))) {
+            String result = "";
+            if ("".endsWith(path.replace("classpath:", ""))) {
+                result = UrlUtil.class.getClassLoader().getResource("").getPath();
+                return result;
+            }
+            String classpath =  UrlUtil.class.getClassLoader().getResource("").getPath();
+            if (!classpath.endsWith("/")) {
+                classpath = classpath + "/";
+            }
+            String var = path.replace("classpath:", "");
+            result = classpath + var;
+            if (var.startsWith("/")) {
+                result = classpath + var.replaceFirst("/", "");
+            }
+            return result;
+        }
+        return null;
+    }
+
 }
