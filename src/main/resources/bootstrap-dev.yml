@@ -1,8 +1,12 @@
 server:
   servlet:
-    context-path: /myproject
+      context-path: /myproject
   port: 9090
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   mail:
     host: smtp.qq.com
     username: 2721688374@qq.com
@@ -19,12 +23,12 @@ spring:
     host: 124.221.243.242
     port: 6379
   # 配置读取jsp文件规则
-  thymeleaf:
-    encoding: UTF-8
-    mode: HTML5
-    prefix: classpath:/WEB-INF/jsp/
-    suffix: .jsp
-    cache: false
+#  thymeleaf:
+#    encoding: UTF-8
+#    mode: HTML5
+#    prefix: classpath:/WEB-INF/jsp/
+#    suffix: .jsp
+#    cache: false
   # 链接腾讯云服务器的cloud
 #  cloud:
 #    nacos:
@@ -51,6 +55,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: auth-service
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 my-config:
   jwt:
@@ -59,4 +70,8 @@ my-config:
 #    default-expir-time: 172800
   # 上传文件路径
   file:
-    upload-dir: classpath:/static/file
+    upload-dir: classpath:/static/file/
+    show-mapping:
+      dns: 127.0.0.1
+      port: 9090
+      mapping: /static/file/

@@ -1,5 +1,6 @@
 package com.voika.myundefined.interfaces.controller.open;
 
+import cn.hutool.core.net.url.UrlBuilder;
 import com.voika.myundefined.infrastructure.JsonData;
 import com.voika.myundefined.infrastructure.email.MailClient;
 import com.voika.myundefined.infrastructure.entity.email.SendEmailDO;
@@ -9,11 +10,19 @@ import com.voika.myundefined.infrastructure.utils.JwtUtil;
 import com.voika.myundefined.infrastructure.redis.IRedis;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,12 +47,9 @@ public class TestController {
      * 测试
      */
     @RequestMapping
-    public JsonData test() {
+    public JsonData test(HttpServletRequest request) {
         try {
-            A a = new A();
-            a.setKey1("2");
-            a.setKey2(null);
-            return JsonData.success(a);
+            return JsonData.success();
         } catch (BusinessException e) {
             int code = null == e.getCode() ? 1 : e.getCode();
             return JsonData.error(e.getMessage(), code);
@@ -54,20 +60,14 @@ public class TestController {
         }
     }
 
-    private void func() {
-        try {
-            // core
-            throw new BusinessException("哎呀～网络开小差了");
-        } catch (BusinessException e) {
-            throw new BusinessException(e.getMessage());
-        } catch (Exception e) {
-            log.error("出现异常{}", e);
-        }
-    }
+
+
+
 
 }
 @Data
 class A {
     private String key1;
     private String key2;
+    private Date key3;
 }

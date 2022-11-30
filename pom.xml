@@ -22,9 +22,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+<!--        </dependency>-->
         <!-- 用于发送邮件 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -127,7 +137,12 @@
         <!-- 切换环境 -->
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/resources/profiles/</directory>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/profiles</directory>
+                <!-- 过滤标识 也就是active: "@env@"这个地方 -->
                 <filtering>true</filtering>
             </resource>
             <resource>
