@@ -63,6 +63,15 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
+sms:
+  # 域名
+  dn: sms.tencentcloudapi.com
+  Action: SendSms
+  Version: 2021-01-11
+  Region: ap-beijing
+  SmsSdkAppId: 1400774213
+  TemplateId:
+
 my-config:
   jwt:
     secrity-key: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
