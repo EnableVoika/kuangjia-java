@@ -1,4 +1,4 @@
-package com.voika.myundefined.infrastructure.jwt;
+package com.voika.myundefined.infrastructure.interfaces;
 
 import io.jsonwebtoken.Claims;
 

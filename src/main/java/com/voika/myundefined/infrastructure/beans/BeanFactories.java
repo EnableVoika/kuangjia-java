@@ -2,10 +2,11 @@ package com.voika.myundefined.infrastructure.beans;
 
 import com.voika.myundefined.infrastructure.redis.IRedis;
 import com.voika.myundefined.infrastructure.redis.impl.IRedisImpl;
-import com.voika.myundefined.infrastructure.email.MailClient;
-import com.voika.myundefined.infrastructure.jwt.IJwt;
+import com.voika.myundefined.infrastructure.client.MailClient;
+import com.voika.myundefined.infrastructure.interfaces.IJwt;
 import com.voika.myundefined.infrastructure.jwt.impl.IJwtImpl;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +20,6 @@ import org.springframework.web.filter.CorsFilter;
  */
 @Configuration
 public class BeanFactories implements BeanFactoryPostProcessor {
-
-
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {

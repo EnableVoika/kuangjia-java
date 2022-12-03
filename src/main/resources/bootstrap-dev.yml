@@ -7,6 +7,23 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+  kafka:
+    bootstrap-servers: 124.221.243.242:9092
+    listener:
+      missing-topics-fatal: false
+    producer:
+      acks: 1
+      retries: 0
+      batch-size: 16384
+      linger:
+        ms: 100
+    consumer:
+      group-id: test-consumer-group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+  #      enable:
+#        idempotence: true
   mail:
     host: smtp.qq.com
     username: 2721688374@qq.com
@@ -72,11 +89,14 @@ sms:
   SmsSdkAppId: 1400774213
   TemplateId:
 
+file-upload:
+  url: http://124.221.243.242:8989/uploadfile/file/upload
+
 my-config:
   jwt:
-    secrity-key: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
+    security-key: myundefined.myproject.RytlockBrimstone.4jiIheuih238hf83BYBfbiuyNWePJwt
     # 默认过期时间 long类型，毫秒单位
-#    default-expir-time: 172800
+    default-expr-time: 172800
   # 上传文件路径
   file:
     upload-dir: classpath:/static/file/

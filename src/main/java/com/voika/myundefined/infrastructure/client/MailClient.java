@@ -1,4 +1,4 @@
-package com.voika.myundefined.infrastructure.email;
+package com.voika.myundefined.infrastructure.client;
 
 import com.voika.myundefined.infrastructure.entity.email.SendEmailDO;
 import org.springframework.mail.SimpleMailMessage;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-//@Component
 public class MailClient {
 
     @Resource

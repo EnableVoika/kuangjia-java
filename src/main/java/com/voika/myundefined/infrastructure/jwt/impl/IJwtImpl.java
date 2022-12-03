@@ -1,17 +1,13 @@
 package com.voika.myundefined.infrastructure.jwt.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.voika.myundefined.infrastructure.jwt.IJwt;
-import com.voika.myundefined.infrastructure.utils.JwtUtil;
+import com.voika.myundefined.infrastructure.interfaces.IJwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -22,28 +18,22 @@ public class IJwtImpl implements IJwt {
     /**
      * 密钥
      */
-//    @Value("${my-config.jwt.secrity-key}")
-    private String secret;
+    @Value("${my-config.jwt.security-key}")
+    private String security;
 
     /**
      * 有效期，单位秒
      * - 默认2周
      */
-//    @Value("${my-config.jwt.default-expir-time}")
-    private long defaultExpirTime;
-
-    {
-        System.out.println(secret);
-        System.out.println(defaultExpirTime);
-
-    }
+    @Value("${my-config.jwt.default-expr-time}")
+    private long defaultExprTime;
 
     public IJwtImpl() {
     }
 
     public IJwtImpl(String secret, long defaultExpirTime) {
-        this.secret = secret;
-        this.defaultExpirTime = defaultExpirTime;
+        this.security = secret;
+        this.defaultExprTime = defaultExpirTime;
     }
 
 
@@ -59,7 +49,7 @@ public class IJwtImpl implements IJwt {
     @Override
     public Claims parse(String token) {
         return Jwts.parser()
-                .setSigningKey(this.secret.getBytes())
+                .setSigningKey(this.security.getBytes())
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -78,7 +68,7 @@ public class IJwtImpl implements IJwt {
     @Override
     public Date getExpir(String token) {
         return Jwts.parser()
-                .setSigningKey(this.secret.getBytes())
+                .setSigningKey(this.security.getBytes())
                 .parseClaimsJws(token)
                 .getBody().getExpiration();
     }
@@ -93,7 +83,7 @@ public class IJwtImpl implements IJwt {
     public Boolean isExpired(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(this.secret.getBytes())
+                    .setSigningKey(this.security.getBytes())
                     .parseClaimsJws(token)
                     .getBody().getExpiration().before(new Date());
         } catch (ExpiredJwtException e) {
@@ -121,13 +111,13 @@ public class IJwtImpl implements IJwt {
     @Override
     public String generateToken(Map<String, Object> claims) {
 //        return generateToken(claims, Long.valueOf(defaultExpirTime));
-        return generateToken(claims, defaultExpirTime);
+        return generateToken(claims, defaultExprTime);
     }
 
     @Override
     public String generateToken(Map<String, Object> claims, long expire) {
         Date expirationTime = this.calculationExpirTime(expire);
-        byte[] keyBytes = secret.getBytes();
+        byte[] keyBytes = security.getBytes();
         SecretKey key = Keys.hmacShaKeyFor(keyBytes);
         return Jwts.builder()
                 .setClaims(claims)
@@ -162,7 +152,7 @@ public class IJwtImpl implements IJwt {
     @Override
     public String generateToken(Object obj) {
 //        return generateToken(obj, Long.valueOf(defaultExpirTime));
-        return generateToken(obj, defaultExpirTime);
+        return generateToken(obj, defaultExprTime);
     }
 
     @Override
@@ -180,7 +170,7 @@ public class IJwtImpl implements IJwt {
      */
     @Override
     public void validateToken(String token) {
-        Jwts.parser().setSigningKey(this.secret.getBytes()).parseClaimsJws(token);
+        Jwts.parser().setSigningKey(this.security.getBytes()).parseClaimsJws(token);
     }
 
 }
