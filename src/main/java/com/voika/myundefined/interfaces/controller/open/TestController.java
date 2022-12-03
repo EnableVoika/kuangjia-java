@@ -2,20 +2,19 @@ package com.voika.myundefined.interfaces.controller.open;
 
 import com.voika.myundefined.infrastructure.JsonData;
 import com.voika.myundefined.infrastructure.client.KafkaClient;
-import com.voika.myundefined.infrastructure.client.MailClient;
+import com.voika.myundefined.infrastructure.entity.kafka.KaMessage;
 import com.voika.myundefined.infrastructure.exception.BusinessException;
 import com.voika.myundefined.infrastructure.interfaces.IJwt;
-import com.voika.myundefined.infrastructure.jwt.impl.IJwtImpl;
 import com.voika.myundefined.infrastructure.redis.IRedis;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.HashMap;
 
 @RequestMapping("/test")
 @RestController
@@ -35,9 +34,9 @@ public class TestController {
      * 测试
      */
     @RequestMapping
-    public JsonData test(HttpServletRequest request) {
+    public JsonData test(@RequestBody(required = false) KaMessage<String> message, HttpServletRequest request) {
         try {
-            kafkaClient.sendMessage("test1","ooo1111");
+            kafkaClient.sendMessage(message);
             return JsonData.success();
         } catch (BusinessException e) {
             int code = null == e.getCode() ? 1 : e.getCode();

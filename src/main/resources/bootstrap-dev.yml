@@ -8,7 +8,7 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
   kafka:
-    bootstrap-servers: 124.221.243.242:9092
+    bootstrap-servers: 124.221.243.242:9092,124.221.243.242:9093
     listener:
       missing-topics-fatal: false
     producer:
@@ -18,7 +18,7 @@ spring:
       linger:
         ms: 100
     consumer:
-      group-id: test-consumer-group
+      group-id: test-consumer-group,test2-consumer-group
       auto-offset-reset: earliest
       enable-auto-commit: true
       auto-commit-interval: 100

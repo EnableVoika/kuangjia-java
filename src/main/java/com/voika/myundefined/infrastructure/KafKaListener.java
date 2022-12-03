@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class KafKaListener {
 
 //    @KafkaListener(topics = "quickstart-events")
-    @KafkaListener(topics = "test1")
+    @KafkaListener(topics = "test1",groupId = "test1-consumer-group")
     public void onMessage(String message){
         // 消费消息
         // 这里为插入数据库代码
