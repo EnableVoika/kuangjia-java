@@ -18,7 +18,7 @@ public class Test2 {
 
     public static void main(String[] args) {
         try {
-            /* 必要步骤：
+            /* 必要步骤，
              * 实例化一个认证对象，入参需要传入腾讯云账户密钥对secretId，secretKey。
              * 这里采用的是从环境变量读取的方式，需要在环境变量中先设置这两个值。
              * 你也可以直接在代码中写死密钥对，但是小心不要将代码复制、上传或者分享给他人，
