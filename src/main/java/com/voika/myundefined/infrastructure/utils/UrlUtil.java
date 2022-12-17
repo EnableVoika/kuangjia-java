@@ -18,7 +18,6 @@ public class UrlUtil {
             Object o = param.get(key);
             buffer.append(key).append("=").append(o).append("&");
         }
-//        buffer.deleteCharAt(buffer.lastIndexOf("&"));
         buffer.deleteCharAt(buffer.length()-1);
         return buffer.toString();
     }
