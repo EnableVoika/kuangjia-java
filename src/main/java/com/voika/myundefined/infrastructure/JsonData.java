@@ -36,25 +36,21 @@ public class JsonData {
         return new JsonData(0, true, "成功", data);
     }
 
-    public static JsonData success(String msg, Integer errorCode) {
+    public static JsonData success(String msg, int errorCode) {
         msg = StringUtil.isEmpty(msg) ? "成功" : msg;
-        errorCode = null == errorCode ? 1 : errorCode;
         return new JsonData(errorCode, false, msg, null);
     }
 
-    public static JsonData success(Integer errorCode) {
-        errorCode = null == errorCode ? 1 : errorCode;
+    public static JsonData success(int errorCode) {
         return new JsonData(errorCode, false, "成功", null);
     }
 
-    public static JsonData success(String msg, Integer errorCode, Object data) {
+    public static JsonData success(String msg, int errorCode, Object data) {
         msg = StringUtil.isEmpty(msg) ? "成功" : msg;
-        errorCode = null == errorCode ? 1 : errorCode;
         return new JsonData(errorCode, false, msg, data);
     }
 
-    public static JsonData success(Integer errorCode, Object data) {
-        errorCode = null == errorCode ? 1 : errorCode;
+    public static JsonData success(int errorCode, Object data) {
         return new JsonData(errorCode, false, "成功", data);
     }
 
@@ -76,25 +72,21 @@ public class JsonData {
         return new JsonData(1, false, "系统繁忙，请稍后再试", data);
     }
 
-    public static JsonData error(String msg, Integer errorCode) {
+    public static JsonData error(String msg, int errorCode) {
         msg = StringUtil.isEmpty(msg) ? "系统繁忙，请稍后再试" : msg;
-        errorCode = null == errorCode ? 1 : errorCode;
         return new JsonData(errorCode, false, msg, null);
     }
 
-    public static JsonData error(Integer errorCode) {
-        errorCode = null == errorCode ? 1 : errorCode;
+    public static JsonData error(int errorCode) {
         return new JsonData(errorCode, false, "系统繁忙，请稍后再试", null);
     }
 
-    public static JsonData error(String msg, Integer errorCode, Object data) {
+    public static JsonData error(String msg, int errorCode, Object data) {
         msg = StringUtil.isEmpty(msg) ? "系统繁忙，请稍后再试" : msg;
-        errorCode = null == errorCode ? 1 : errorCode;
         return new JsonData(errorCode, false, msg, data);
     }
 
-    public static JsonData error(Integer errorCode, Object data) {
-        errorCode = null == errorCode ? 1 : errorCode;
+    public static JsonData error(int errorCode, Object data) {
         return new JsonData(errorCode, false, "系统繁忙，请稍后再试", data);
     }
 

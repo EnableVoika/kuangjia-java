@@ -1,6 +1,6 @@
-package com.voika.myundefined.infrastructure.client;
+package com.voika.myundefined.infrastructure.kafka;
 
-import com.voika.myundefined.infrastructure.entity.kafka.KaMessage;
+import com.voika.myundefined.infrastructure.entity.kafka.KaMessageDO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class KafkaClient{
         return true;
     }
 
-    public boolean sendMessage(KaMessage<String> message) {
+    public boolean sendMessage(KaMessageDO<String> message) {
         // 发送消息
         try {
             kafkaTemplate.send(message.getTopicId(),message.getContent());

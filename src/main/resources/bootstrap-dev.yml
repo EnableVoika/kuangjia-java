@@ -82,12 +82,13 @@ spring:
 
 sms:
   # 域名
-  dn: sms.tencentcloudapi.com
+  host: sms.tencentcloudapi.com
   Action: SendSms
   Version: 2021-01-11
   Region: ap-beijing
   SmsSdkAppId: 1400774213
-  TemplateId:
+  TemplateId: 1627838
+  SignName: TARDIS
 
 file-upload:
   url: http://124.221.243.242:8989/uploadfile/file/upload
